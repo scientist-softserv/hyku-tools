@@ -29,3 +29,166 @@
 + app/models/account.rb::unable to delete a tenant per LaRita. says ok but it still exists.
 + app/models/nil_endpoint.rb:: match endpoint interface/public methods
 + app/models/solr_endpoint.rb::ok
++ app/models/nil_fcrepo_endpoint.rb::ok
++ app/models/domain_name.rb::ok
++ app/models/nil_datacite_endpoint.rb::DOI gem does not work. It was not capitable with Hyrax3+.
++ app/models/generic_work_resource.rb::Verify same behavior as GenericWork
++ app/models/solr_document.rb::Is there a valkyrie equivalent? see if there's any differences in kas
++ app/models/iiif_search_builder.rb::ok
++ app/models/nil_solr_endpoint.rb::Why does switch! do anything if it's nil. may need to add valkyrie methods. ref solr endpoint
++ app/models/collection.rb::Pcdm collection needs to account for featured collections. port functionality over to valkyrie equivalent
++ app/models/endpoint.rb::ok
++ app/models/qa/local_authority_entry.rb::ok
++ app/models/qa/local_authority.rb::ok
++ app/models/site.rb::LaRita was unable to upload banners/logos. Worth looking into.
++ app/models/generic_work.rb::ensure valkyrie has similar behaviors
++ app/models/hyrax/permission_template_access_decorator.rb::ok
++ app/models/hyrax/collection_type_participant_decorator.rb::ok
++ app/models/hyrax/contact_form_decorator.rb::ok
++ app/models/role.rb::ok
++ app/models/nil_redis_endpoint.rb::ok
++ app/models/group_role.rb::ok
++ app/models/ability.rb::ok
++ app/models/search_builder.rb::ok
++ app/models/fcrepo_endpoint.rb::ok
++ app/models/featured_collection_list.rb::check Hyrax::PresenterFactory to confirm that #collection_presenters workupdate query in #collections_wid_id. valkyrize AF methods like #destroy as well.
++ app/models/image_resource.rb::bring in Image behavior
++ app/models/file_set.rb::there may be a FileSetResource. Rob is working on the FileSet piece for Valkyrie
++ app/models/application_record.rb::ok
++ app/models/account_cross_search.rb::ok
++ app/models/nil_site.rb::ok
++ app/models/hydra/access_controls/embargo_decorator.rb::review how Hyrax does this. contribute fix back? check hydra access control versions
++ app/models/hydra/access_controls/lease_decorator.rb::review how Hyrax does this. contribute fix back? check hydra access control versions
++ app/models/concerns/account_cname.rb::ok
++ app/models/concerns/account_endpoints.rb::ok
++ app/models/concerns/hyrax/ability/user_ability.rb::ok
++ app/models/concerns/hyrax/ability/work_ability.rb::ok
++ app/models/concerns/account_switch.rb::ok
++ app/models/concerns/account_settings.rb::to review if settings is still supported. For some reason Shana thinks it was removed to be reimplemented a different way.
++ app/models/datacite_endpoint.rb::Does not currently work. Not supported on Hyrax 3+
++ app/models/user.rb::ok
++ app/models/identity_provider.rb::ok
++ app/presenters/hyku/work_show_presenter.rb::this will likely need some work to comfirm compatibility w Valkyrie
++ app/presenters/hyku/admin/group/navigation_presenter.rb::what is this?
++ app/presenters/hyku/menu_presenter.rb::ok
++ app/presenters/hyku/collapsable_section_presenter.rb::ok
++ app/presenters/hyrax/generic_work_presenter.rb::do we need a valkyrie equivalent?
++ app/presenters/hyrax/admin/workflow_roles_presenter_decorator.rb::ok
++ app/presenters/hyrax/admin/dashboard_presenter_decorator.rb::ok
++ app/presenters/hyrax/iiif_manifest_presenter_decorator.rb::ok
++ app/presenters/hyrax/collection_presenter_decorator.rb::compare to hyrax collection presenter. will valkyrie need work for this?
++ app/presenters/hyrax/image_presenter.rb::ok
++ app/presenters/hyrax/homepage_presenter_decorator.rb::ok
++ app/presenters/concerns/hyrax/iiif_av/displays_content_decorator.rb::ok
++ app/factories/bulkrax/object_factory_decorator.rb::may go away with valkyrie
++ app/actors/hyrax/environment_decorator.rb::do we care about this? does this need a custom transaction added for valkyrie? may be cleaned up when we work on bulkrax x valkyrie
++ app/actors/hyrax/actors/image_actor.rb::ok
++ app/actors/hyrax/actors/generic_work_actor.rb::ok
++ app/jobs/lease_auto_expiry_job.rb::ok
++ app/jobs/delete_old_guests_job.rb::ok
++ app/jobs/reindex_admin_sets_job.rb::LaRita has a draft PR up for this for attempts to switch to Valkyrie.
++ app/jobs/reindex_item_job.rb::LaRita has a draft PR up for this for attempts to switch to Valkyrie.
++ app/jobs/reindex_works_job.rb::LaRita has a draft PR up for this for attempts to switch to Valkyrie.
++ app/jobs/remove_solr_collection_job.rb::ok
++ app/jobs/create_redis_namespace_job.rb::ok
++ app/jobs/create_account_inline_job.rb::ok
++ app/jobs/cleanup_account_job.rb::ok
++ app/jobs/create_solr_collection_job.rb::ok
++ app/jobs/create_fcrepo_endpoint_job.rb::ok
++ app/jobs/application_job.rb::ok
++ app/jobs/embargo_auto_expiry_job.rb::ok
++ app/jobs/reindex_collections_job.rb::LaRita has a draft PR up for this for attempts to switch to Valkyrie.
++ app/jobs/create_default_admin_set_job.rb::We need to look into this. Creating a new tenant should spin off this job to create an AdminSet with the default id. This is not working right.
++ app/jobs/reindex_file_sets_job.rb::LaRita has a draft PR up for this for attempts to switch to Valkyrie.
++ app/controllers/application_controller.rb::ok
++ app/controllers/hyku/invitations_controller.rb::to test
++ app/controllers/hyku/registrations_controller.rb::ok
++ app/controllers/proprietor_controller.rb::ok
++ app/controllers/generic_resources_controller.rb::Why are we referring to Hyrax::Test for curation_concern_type?
++ app/controllers/admin/group_roles_controller.rb::ok
++ app/controllers/admin/group_users_controller.rb::ok
++ app/controllers/admin/groups_controller.rb::ok
++ app/controllers/admin/users_controller.rb::ok
++ app/controllers/admin/work_types_controller.rb::ok
++ app/controllers/admin/accounts_controller.rb::ok
++ app/controllers/splash_controller.rb::ok
++ app/controllers/saved_searches_controller.rb::This should be removed. it was deprecated in blacklight 7
++ app/controllers/labels_controller.rb::ok
++ app/controllers/identity_providers_controller.rb::ok
++ app/controllers/hyrax/images_controller.rb::need a valkyrie equivalent with similar behavior
++ app/controllers/hyrax/content_blocks_controller_decorator.rb::ok
++ app/controllers/hyrax/contact_form_controller_decorator.rb::need to clean up searches for collections in here.
++ app/controllers/hyrax/pages_controller_decorator.rb::need to clean up searches for collections in here.
++ app/controllers/hyrax/generic_works_controller.rb::make sure valkyrie equivalent exists
++ app/controllers/hyrax/admin/appearances_controller_decorator.rb::ok - after reindex jobs work
++ app/controllers/hyrax/admin/collection_type_participants_controller_decorator.rb::ok
++ app/controllers/hyrax/dashboard/collections_controller_decorator.rb::Need to address issues in here. View is looking for a collection type that is missing.
++ app/controllers/hyrax/featured_collection_lists_controller.rb::ok
++ app/controllers/hyrax/image_resources_controller.rb::make sure behavior matches image controller
++ app/controllers/hyrax/generic_work_resources_controller.rb::make sure behavior matches generic work controller
++ app/controllers/hyrax/featured_collections_controller.rb::this should work but the place using it may not.
++ app/controllers/status_controller.rb::ok
++ app/controllers/users/omniauth_callbacks_controller.rb::ok
++ app/controllers/admin_controller.rb::todo: move to hyrax?
++ app/controllers/sites_controller.rb::ok
++ app/controllers/search_history_controller.rb::ok
++ app/controllers/proprietor/users_controller.rb::ok
++ app/controllers/proprietor/accounts_controller.rb::not related to valkyrie but there is a bug here. params are missing. the user is not able to edit their domain names.
++ app/controllers/account_sign_up_controller.rb::ok
++ app/controllers/single_signon_controller.rb::ok
++ app/controllers/catalog_controller.rb::does our version match Hyrax's generated version? How does valkyrie use this?
++ app/controllers/concerns/hyku/works_controller_behavior.rb::should/can this inherit from Hyrax? Kirk spend time on it already.
++ app/controllers/concerns/hyrax/users_controller_decorator.rb::ok
++ app/intercepter/per_tenant_smtp_interceptor.rb::ok
++ app/helpers/admin_stats_helper.rb::ok
++ app/helpers/group_navigation_helper.rb::ok
++ app/helpers/google_tag_manager_helper.rb::ok
++ app/helpers/hyku/blacklight_helper_behavior.rb::ok
++ app/helpers/accounts_helper.rb::ok
++ app/helpers/hyrax/override_helper_behavior.rb::very old version of Hyrax. may be worth re-evaluating.
++ app/helpers/shared_search_helper.rb::ok
++ app/helpers/hyrax_helper.rb::ok
++ app/helpers/application_helper.rb::ok
++ app/helpers/hyku_helper.rb::ok
++ app/services/create_account.rb::Hyrax::AdminSetCreateService.find_or_create_default_admin_set.id doesn't appear to be working.
++ app/services/group_aware_role_checker.rb::ok
++ app/services/hyrax/collection_types/create_service_decorator.rb::ok
++ app/services/hyrax/quick_classification_query_decorator.rb::ok
++ app/services/hyrax/work_thumbnail_path_service_decorator.rb::ok
++ app/services/hyrax/custom_queries/find_by_bulkrax_identifier.rb::we'll need to revisit this
++ app/services/hyrax/thumbnail_path_service_decorator.rb::ok
++ app/services/hyrax/file_set_derivatives_service_decorator.rb::Rob to figure out
++ app/services/hyrax/workflow/permission_grantor.rb::ok
++ app/services/hyrax/indexes_thumbnails_decorator.rb::check object.try(:collection?) to make sure Valkyrie will respond to it
++ app/services/hyrax/manifest_builder_service_decorator.rb::ok
++ app/services/hyrax/collections/permissions_service_decorator.rb::check in with Jeremy for #manage_access_to_collection - contribute back?
++ app/services/hyrax/collections/permissions_create_service_decorator.rb::ok
++ app/services/hyrax/admin_set_create_service_decorator.rb::to review - not working for valkyrie. id needs to be nil for valkyrie but it creates two works. may need to check in with Rob and his adapter, which is where the error is coming from. 
++ app/services/hyrax/permission_manager_decorator.rb::ok
++ app/services/uploaded_collection_thumbnail_path_service.rb::need to verify this works for valkyrie
++ app/services/roles_service.rb::LaRita believes we had issues here. to confirm if issues still exist
++ app/services/wings/custom_queries/find_by_bulkrax_identifier.rb::to review with bulkrax x valkyrie
++ lib/tasks/index.rake::LaRita has a PR for indexing. verify what to do with this rake task.
++ lib/tasks/reset.rake::we will need to review and possible change this or make a valkryie equivalent
++ lib/tasks/tenantize_task.rake::ok
++ lib/tasks/user.rake::ok
++ lib/tasks/rubocop.rake::ok
++ lib/tasks/db_enhancements.rake::do we need to create a valkyrie equivalent?
++ lib/tasks/grant_superadmin.rake::ok
++ lib/tasks/upgrade.rake::ok
++ lib/tasks/group_parameterize_name.rake::ok
++ lib/tasks/roles.rake::ok
++ lib/iiif_manifest/manifest_builder/canvas_builder_decorator.rb::ok
++ lib/iiif_manifest/v3/manifest_builder/canvas_builder_decorator.rb::ok
++ lib/oai/provider/response/list_metadata_formats_decorator.rb::ok
++ lib/oai/provider/model_decorator.rb::ok
++ lib/oai/provider/metadata_format/hyku_dublin_core.rb::ActiveFedora::SolrService.query needs to be updated
++ lib/omni_auth/strategies/saml_decorator.rb::ok
++ lib/hyrax/solr_service_decorator.rb::ok
++ lib/templates/erb/scaffold/_form.html.erb::ok
++ lib/active_job/queue_adapters/better_active_elastic_job_adapter.rb::ok
++ lib/active_job_tenant.rb::ok
++ lib/assets/batch-upload-test/sample.docx::ok
++ lib/assets/batch-upload-test/example3.tiff::ok
++ lib/assets/csv_test.csv::ok
++ lib/wings/services/custom_queries/find_ids_by_model_decorator.rb::ok
