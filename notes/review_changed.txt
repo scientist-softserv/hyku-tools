@@ -1,0 +1,95 @@
+Δ spec/spec_helper.rb::deferred
+Δ spec/tasks/rake_spec.rb::deferred
+Δ spec/forms/hyrax/forms/permission_template_form_spec.rb::deferred
+Δ spec/forms/hyrax/generic_work_form_spec.rb::deferred
+Δ spec/features/collection_spec.rb::deferred
+Δ spec/features/create_work_spec.rb::deferred
+Δ spec/features/collection_type_spec.rb::deferred
+Δ spec/features/edit_work_spec.rb::deferred
+Δ spec/models/collection_spec.rb::deferred
+Δ spec/models/content_block_spec.rb::deferred
+Δ spec/models/hyrax/group_spec.rb::deferred
+Δ spec/models/user_spec.rb::deferred
+Δ spec/presenters/hyrax/admin/workflow_roles_presenter_spec.rb::deferred
+Δ spec/presenters/hyrax/iiif_manifest_presenter_spec.rb::deferred
+Δ spec/abilities/collection_ability_spec.rb::deferred
+Δ spec/support/rake.rb::deferred
+Δ spec/factories/admin_sets.rb::deferred
+Δ spec/factories/object_id.rb::deferred
+Δ spec/factories/file_sets.rb::deferred
+Δ spec/factories/generic_works.rb::deferred
+Δ spec/factories/workflow_actions.rb::deferred
+Δ spec/factories/collection_type_participants.rb::deferred
+Δ spec/factories/content_blocks.rb::deferred
+Δ spec/factories/collection_types.rb::deferred
+Δ spec/factories/workflows.rb::deferred
+Δ spec/factories/collections.rb::deferred
+Δ spec/factories/permission_template_accesses.rb::deferred
+Δ spec/factories/users.rb::deferred
+Δ spec/factories/permission_templates.rb::deferred
+Δ spec/actors/hyrax/actors/generic_work_actor_spec.rb::deferred
+Δ spec/controllers/catalog_controller_spec.rb::deferred
+Δ spec/controllers/hyrax/homepage_controller_spec.rb::deferred
+Δ spec/controllers/hyrax/admin/appearances_controller_spec.rb::deferred
+Δ spec/controllers/hyrax/generic_works_controller_spec.rb::deferred
+Δ spec/controllers/hyrax/content_blocks_controller_spec.rb::deferred
+Δ spec/views/hyrax/admin/users/index.html.erb_spec.rb::deferred
+Δ spec/views/hyrax/dashboard/collections/_form_share_table.html.erb_spec.rb::deferred
+Δ spec/views/hyrax/dashboard/collections/_form_share.erb_spec.rb::deferred
+Δ spec/views/_user_util_links.html.erb_spec.rb::deferred
+Δ spec/views/content_blocks/edit.html.erb_spec.rb::deferred
+Δ spec/rails_helper.rb::deferred
+Δ spec/helpers/hyrax_helper_spec.rb::deferred
+Δ spec/services/hyrax/quick_classification_query_spec.rb::deferred
+Δ spec/services/hyrax/thumbnail_path_service_spec.rb::deferred
+Δ app/mailers/hyrax/contact_mailer.rb::Consider renaming HykuMailer to ApplicationMailer
+Δ app/models/content_block.rb::address deprecation
+Δ app/models/hyrax/group.rb::maybe permission template issues
+Δ app/models/featured_work.rb::Todo a double_combo add class_attribute to Hyrax, we can make it configurable, configure in Hyku
+Δ app/models/concerns/hyrax/ability/solr_document_ability.rb::functionality is right, improve documentation
+Δ app/models/concerns/hyrax/ability/collection_ability.rb::needs a deliberate review
+Δ app/presenters/hyrax/admin/users_presenter.rb::convert to decorator
+Δ app/controllers/hyrax/homepage_controller.rb::here there be dragons, isolate collection queries that require extensive changes
+Δ app/controllers/concerns/hyrax/admin/users_controller_behavior.rb::ok
+Δ app/views/_head_tag_extras.html.erb::ok
+Δ app/views/_logo.html.erb::ok
+Δ app/views/catalog/_index_header_list_collection.html.erb::ok
+Δ app/views/catalog/_index_header_list_default.html.erb::ok but maybe revisit h3 vs h4
+Δ app/views/catalog/_thumbnail_list_collection.html.erb::review override
+Δ app/views/catalog/_index_gallery_collection_wrapper.html.erb::review override
+Δ app/views/_user_util_links.html.erb::ok but as we log in and now we'll see if it's working, revisit ml-auto vs navbar-dark, pay attention to UI notification
+Δ app/views/shared/_appearance_styles.html.erb::ok
+Δ app/views/shared/_footer.html.erb::review ui footer classes
+Δ app/views/_masthead.html.erb::ok
+Δ app/views/layouts/hyrax.html.erb::revisit content_for(:container_header), we might want to bring that in
+Δ app/views/layouts/homepage.html.erb::add block_for(name: 'banner_image_text') to Hyrax and remove this, perhaps
+Δ app/views/hyrax/batch_edits/_delete_selected.html.erb::revisit permissions and hidden class, do we even see it?
+Δ app/views/hyrax/homepage/_featured_fields.html.erb::ok
+Δ app/views/hyrax/homepage/_explore_collections.html.erb::check the parent rendering view for table
+Δ app/views/hyrax/homepage/_recent_document.html.erb::ok
+Δ app/views/hyrax/homepage/_home_content.html.erb::ok
+Δ app/views/hyrax/contact_form/new.html.erb::ok
+Δ app/views/hyrax/admin/collection_types/_form_participant_table.html.erb::maybe ok, needs revisiting, check functionality
+Δ app/views/hyrax/admin/collection_types/_form_participants.html.erb::contribute back translations
+Δ app/views/hyrax/admin/workflow_roles/index.html.erb::probably okay, just need to test
+Δ app/views/hyrax/admin/admin_sets/_form_participant_table.html.erb::should be okay, revisit comment on ln23
+Δ app/views/hyrax/admin/admin_sets/_form_participants.html.erb::verify behavior works
+Δ app/views/hyrax/admin/appearances/show.html.erb::ok
+Δ app/views/hyrax/admin/users/index.html.erb::ok
+Δ app/views/hyrax/admin/stats/show.html.erb::review hyrax implementation
+Δ app/views/hyrax/uploads/_js_templates_branding.html.erb::ok
+Δ app/views/hyrax/dashboard/sidebar/_activity.html.erb::ok
+Δ app/views/hyrax/dashboard/sidebar/_configuration.html.erb::ok
+Δ app/views/hyrax/dashboard/sidebar/_repository_content.html.erb::ok
+Δ app/views/hyrax/dashboard/sidebar/_tasks.html.erb::ok
+Δ app/views/hyrax/dashboard/_sidebar.html.erb::contribute the 17-22 to add title
+Δ app/views/hyrax/dashboard/works/_list_works.html.erb::contribute entire view back
+Δ app/views/hyrax/dashboard/collections/_show_add_items_actions.html.erb::ok
+Δ app/views/hyrax/dashboard/collections/_show_document_list_row.html.erb::ok
+Δ app/views/hyrax/dashboard/collections/_show_actions.html.erb::ok
+Δ app/views/hyrax/dashboard/collections/_form_discovery.html.erb::ok
+Δ app/views/hyrax/dashboard/collections/_form_share_table.html.erb::ok
+Δ app/views/hyrax/dashboard/collections/_list_collections.html.erb::contribute back, add new translation in hyrax (hyrax.dashboard.my.sr.collections_batch_checkbox)
+Δ app/views/hyrax/dashboard/collections/_subcollection_list.html.erb::consider adding manage items in collection ability that echoes the edit ability to Hyrax
+Δ app/views/hyrax/dashboard/collections/_show_parent_collection_row.html.erb::consider adding manage items in collection ability that echoes the edit ability to Hyrax
+Δ app/views/hyrax/dashboard/collections/_form_branding.html.erb::ok

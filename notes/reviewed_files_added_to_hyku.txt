@@ -1,0 +1,31 @@
++ app/indexers/app_indexer.rb::Review if functionality should be added to the Valkyrie indexer.
++ app/indexers/generic_work_resource_indexer.rb::Add account cname
++ app/indexers/generic_work_indexer.rb::ok
++ app/indexers/collection_indexer.rb::ok
++ app/indexers/image_resource_indexer.rb::Needs to account for site label. a module will likely be created to handle site label.
++ app/indexers/image_indexer.rb::ok
++ app/uploaders/logo_uploader.rb::ok
++ app/uploaders/favicon_uploader.rb::ok
++ app/middleware/no_cache_middleware.rb::ok
++ app/middleware/account_elevator.rb::ok
++ app/forms/image_resource_form.rb::add form validations/compare to image form.
++ app/forms/generic_work_resource_form.rb::add form validations/compare to image form.
++ app/forms/hyrax/forms/permission_template_form_decorator.rb::ok
++ app/forms/hyrax/forms/admin/collection_type_form_decorator.rb::mostly ok but not sure why it's decorated.
++ app/forms/hyrax/forms/admin/appearance_decorator.rb::banner_image=, logo_image=, controller may need updates
++ app/forms/hyrax/forms/workflow_responsibility_form_decorator.rb::ok
++ app/forms/hyrax/forms/workflow_responsibility_group_form.rb::ok
++ app/forms/hyrax/forms/collection_form_decorator.rb::mostly ok, permission template issue. check with LaRita
++ app/forms/hyrax/generic_work_form.rb::make GenericWorkResourceFrom similar.
++ app/forms/hyrax/form_terms.rb::is there a similar equivalent for valkyrie?
++ app/forms/hyrax/image_form.rb::verify ImageResourceForm matches
++ app/mailers/hyku_mailer.rb::rename to ApplicationMailer
++ app/search_builders/adv_search_builder.rb::ok
++ app/search_builders/hyrax/collection_member_search_builder_decorator.rb::confirm behaviors being decorated.
++ app/models/image.rb::compare to ImageResource and confirm same behaviors
++ app/models/redis_endpoint.rb::ok
++ app/models/featured_collection.rb::there may be bugs here. deleting a collection doesn't delete featured collection. make a listener for valkyrie
++ app/models/qa.rb::ok
++ app/models/account.rb::unable to delete a tenant per LaRita. says ok but it still exists.
++ app/models/nil_endpoint.rb:: match endpoint interface/public methods
++ app/models/solr_endpoint.rb::ok
