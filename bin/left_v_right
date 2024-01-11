@@ -1,0 +1,132 @@
+#!/usr/bin/env ruby -wU
+
+# The purpose of this script is to provide a list of files:
+#
+# - in left but not in right
+# - in right but not in left
+# - in left and same as in right
+# - in left but different from right
+require 'optparse'
+config = { left: './', right: './hyrax-webapp', patterns_to_check: ["spec/**/*.*", "app/**/*.*", "lib/**/*.*"] }
+
+command_name = File.basename(__FILE__)
+
+
+nlp = new_line_padding = " " * 37
+optparse = OptionParser.new do |options|
+  # This banner is the first line of left help documentation.
+  options.set_banner "Usage: #{command_name} [options]\n\n" \
+                     "#{command_name} - A command line tool for listing directory differences.\n\n"
+
+  options.on('-r PATH', '--right', String, "The file path that contains the \"on the right\"\n#{nlp}directory.\n#{nlp}Default: #{config[:right]}") do |right|
+    config[:right] = right
+  end
+
+  options.on('-l PATH', '--left', String, "The file path that contains the \"on the left\"\n#{nlp}directory.\n#{nlp}Default: #{config[:left]}") do |left|
+    config[:left] = left
+  end
+
+  options.on_tail('-h', '--help', "You're looking at it!") do
+    warn options
+    exit 1
+  end
+end
+
+begin
+  optparse.parse!
+  mandatory = %i[left right]
+  missing = mandatory.select { |param| config[param].nil? }
+  raise OptionParser::MissingArgument, missing.join(', ') unless missing.empty?
+rescue OptionParser::InvalidOption, OptionParser::MissingArgument
+  warn "\e[0m\e[1m\e[31m#{$!}\e[0m\n"
+  warn optparse
+  exit
+end
+
+require 'fileutils'
+
+in_left_but_not_in_right = []
+in_right_but_not_in_left = []
+duplicates = []
+different = []
+
+left = config.fetch(:left)
+right = config.fetch(:right)
+dir_glob_patterns_to_check = config.fetch(:patterns_to_check)
+
+dir_glob_patterns_to_check.each do |pattern|
+  Dir.glob(File.join(left, pattern)).each do |left_path|
+    path = left_path.sub(File.join(left, '/'), '')
+    right_path = File.join(right, path)
+    if File.exist?(right_path)
+      results = `diff #{left_path} #{right_path}`.strip
+      if results.empty?
+        duplicates << path
+      else
+        different << path
+      end
+    else
+      in_left_but_not_in_right << path
+    end
+  end
+  Dir.glob(File.join(right, pattern)).each do |right_path|
+    path = right_path.sub(File.join(left, '/'), '')
+    left_path = File.join(left, path)
+    next if File.exist?(left_path)
+
+    in_right_but_not_in_left << path
+  end
+end
+
+
+puts "#"*72
+puts "# {command_name} run context:"
+puts "#"*72
+puts "# Working Directory: #{FileUtils.pwd}"
+puts "# Left: #{left}"
+puts "# Right: #{right}"
+puts "# Patterns to Check:"
+config.fetch(:patterns_to_check).each do |pattern|
+  puts "#  * #{pattern}"
+end
+puts ""
+
+puts "################################################################"
+puts "# Files in \"left\" that are exact duplicates of \"right\" files"
+puts "# They are prefixed with a `='"
+puts "################################################################"
+duplicates.each do |path|
+  puts "= #{path}"
+  if ENV['RM_DUPS']
+    File.unlink(path)
+  end
+end
+
+puts ""
+
+puts "#################################################"
+puts "# Files that are in \"left\" but not in \"right\""
+puts "# They are prefixed with a `<'"
+puts "#################################################"
+in_left_but_not_in_right.each do |path|
+  puts "< #{path}"
+end
+
+puts ""
+
+puts "#################################################"
+puts "# Files that are in \"right\" but not in \"left\""
+puts "# They are prefixed with a `>'"
+puts "#################################################"
+in_left_but_not_in_right.each do |path|
+  puts "> #{path}"
+end
+
+puts ""
+puts "####################################################"
+puts "# Files that are different in \"left\" and \"right\""
+puts "# They are prefixed with a `Δ'"
+puts "####################################################"
+different.each do |path|
+  puts "Δ #{path}"
+end
