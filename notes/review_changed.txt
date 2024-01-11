@@ -93,3 +93,31 @@
 Δ app/views/hyrax/dashboard/collections/_subcollection_list.html.erb::consider adding manage items in collection ability that echoes the edit ability to Hyrax
 Δ app/views/hyrax/dashboard/collections/_show_parent_collection_row.html.erb::consider adding manage items in collection ability that echoes the edit ability to Hyrax
 Δ app/views/hyrax/dashboard/collections/_form_branding.html.erb::ok
+Δ spec/models/solr_document_spec.rb::deferred
+Δ spec/controllers/hyrax/my/collections_controller_spec.rb::deferred
+Δ spec/views/hyrax/base/_relationships.html.erb_spec.rb::deferred
+Δ app/views/hyrax/file_sets/media_display/_pdf.html.erb::we may need to add the link_to for the download
+Δ app/views/hyrax/file_sets/_actions.html.erb::contribute "caret" back, need to add from Hyrax dropdown-item classes for <li> tags
+Δ app/views/hyrax/admin/features/index.html.erb::change panel and panel-body to card and card-body ln 11-12
+Δ app/views/hyrax/dashboard/collections/_form_share.html.erb::ok
+Δ app/views/hyrax/dashboard/collections/_form.html.erb::possible contribute back to hyrax, Hyku has the ability to add a specific image for Collections
+Δ app/views/hyrax/my/_work_action_menu.html.erb::might be a full contribute back to Hyrax
+Δ app/views/hyrax/my/_search_header.html.erb::could contribute back catalog/sort_widget, create a blank partial for Hyrax
+Δ app/views/hyrax/my/_collection_action_menu.html.erb::bring in <% if collection_presenter.collection_type_is_nestable? %> from Hyrax to  ln 47 in Hyku, also review can?(:destroy, collection_presenter... if logic is the same then remove this partial
+Δ app/views/hyrax/my/works/_list_works.html.erb::black_for contribute back required
+Δ app/views/hyrax/my/collections/_list_collections.html.erb::black_for contribute back required, also slightly different translation above that would be nice to contribute back
+Δ app/views/hyrax/collections/_media_display.html.erb::block_for contribute back
+Δ app/views/hyrax/collections/show.html.erb::look at collection presenter treatment of banner_file (ln 9 in Hyku)
+Δ app/views/hyrax/content_blocks/_form.html.erb::ok
+Δ app/views/hyrax/base/_form_files.html.erb::bring over upload_file_limit information, update classes to bootstrap 4
+Δ app/views/hyrax/base/_relationships.html.erb::ok
+Δ app/views/hyrax/base/_show_actions.html.erb::requires a deep dive
+Δ app/views/hyrax/base/_representative_media.html.erb::ok
+Δ app/views/hyrax/base/show.html.erb::ok
+Δ app/views/hyrax/base/_form_share.html.erb::bring in translations, like on ln 6, 15, 25, etc)
+Δ app/views/hyrax/base/_form.html.erb::deleting, no longer needed
+Δ app/views/hyrax/base/_attribute_rows.html.erb::deleting, no longer needed
+Δ app/assets/javascripts/hyrax/thumbnail_select.es6::possibly a contribute back and remove, set up a UI test
+Δ app/assets/javascripts/hyrax/app.js.erb::might contribute back as well
+Δ app/assets/javascripts/hyrax/featured_works.js::ok
+Δ app/services/hyrax/collection_thumbnail_path_service.rb::make into a decorator
