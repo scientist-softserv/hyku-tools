@@ -73,7 +73,7 @@ Once we had completed our review, we converted the notes to tab-separated value 
 Using `cat`, `sed`, and the `>` operator, we created the file:
 
 ```bash
-cat ~/git/hyku-tools/notes/reviewed_files_added_to_hyku.txt | 
+cat ./notes/reviewed_files_added_to_hyku.txt | 
   sed 's/::/\t/g' |
   sed 's/+ //g' > ~/Desktop/files-added-review-notes.txt
 ```
