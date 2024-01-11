@@ -59,3 +59,23 @@ The [`bin/example-reviewer.rb`](./bin/example-reviewer.rb) script demonstrates a
 - Iterating through the `~/to-review.txt` file and handling each of the four file cases differently.
 - Writing the decision notes to a `~/reviewed.txt` file.
 - Allowing you to quit (via `CTRL-c`), save what you reviewed, and resume at where you left off.
+
+### Example: Moving the Reviewed Notes to Google Sheets
+
+On <2024-01-10 Wed> and <2024-01-11 Thu> Team Violet mobbed on reviewing files in Hyku but not Hyrax as well as files changed in Hyku (relative to Hyrax).
+
+The [`./notes/reviewed_files_added_to_hyku.txt`](./notes/reviewed_files_added_to_hyku.txt) reflects files added to Hyku.  These lines start with a `+` sign.
+
+The [`./notes/review_changed.txt`](./notes/review_changed.txt) is our mobbing session to assess each file, as quickly as possible so we could then "fan out" and work individually (or in smaller pairs).  These lines start with a `Δ` sign.
+
+Once we had completed our review, we converted the notes to tab-separated value files (TSV) and [uploaded the notes to Google Sheets](https://docs.google.com/spreadsheets/d/17eaRJeHq3CTkeDD2w7cLGCiR0rcs_MkNdgMZSnSP6Uo/edit#gid=0&fvid=725268320).
+
+Using `cat`, `sed`, and the `>` operator, we created the file:
+
+```bash
+cat ~/git/hyku-tools/notes/reviewed_files_added_to_hyku.txt | 
+  sed 's/::/\t/g' |
+  sed 's/+ //g' > ~/Desktop/files-added-review-notes.txt
+```
+
+
