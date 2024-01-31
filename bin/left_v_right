@@ -7,7 +7,7 @@
 # - in left and same as in right
 # - in left but different from right
 require 'optparse'
-config = { left: './', right: './hyrax-webapp', patterns_to_check: ["spec/**/*.*", "app/**/*.*", "lib/**/*.*"] }
+config = { left: './', right: './hyrax-webapp', summary: false, patterns_to_check: ["spec/**/*.*", "app/**/*.*", "lib/**/*.*"] }
 
 command_name = File.basename(__FILE__)
 
@@ -24,6 +24,10 @@ optparse = OptionParser.new do |options|
 
   options.on('-l PATH', '--left', String, "The file path that contains the \"on the left\"\n#{nlp}directory.\n#{nlp}Default: #{config[:left]}") do |left|
     config[:left] = left
+  end
+
+  options.on('-s', '--summary', "Only render a summary:") do |summary|
+    config[:summary] = summary
   end
 
   options.on_tail('-h', '--help', "You're looking at it!") do
@@ -53,6 +57,7 @@ different = []
 left = config.fetch(:left)
 right = config.fetch(:right)
 dir_glob_patterns_to_check = config.fetch(:patterns_to_check)
+summary = config.fetch(:summary)
 
 dir_glob_patterns_to_check.each do |pattern|
   Dir.glob(File.join(left, pattern)).each do |left_path|
@@ -78,55 +83,86 @@ dir_glob_patterns_to_check.each do |pattern|
   end
 end
 
+GitData = Struct.new(:url, :sha, :status, :branch, keyword_init: true)
+def git_data_for(source)
+  GitData.new(
+    url: `cd #{source}; git remote get-url origin`.strip,
+    sha: `cd #{source}; git log --pretty=format:'%H' -1`.strip,
+    status: `cd #{source}; git status --porcelain`.strip.size.zero? ? "clean" : "dirty",
+    branch: `cd #{source}; git branch --show-current`.strip
+  )
+end
+
+left_data = git_data_for(left)
+right_data = git_data_for(right)
 
 puts "#"*72
 puts "# #{command_name} run context:"
 puts "#"*72
+puts "#"
 puts "# Working Directory: #{FileUtils.pwd}"
+puts "#"
 puts "# Left: #{left}"
+puts "#   URL: #{left_data.url}"
+puts "#   BRANCH: #{left_data.branch}"
+puts "#   SHA: #{left_data.sha}"
+puts "#   STATUS: #{left_data.status}"
+puts "#"
 puts "# Right: #{right}"
+puts "#   URL: #{right_data.url}"
+puts "#   BRANCH: #{right_data.branch}"
+puts "#   SHA: #{right_data.sha}"
+puts "#   STATUS: #{right_data.status}"
+puts "#"
 puts "# Patterns to Check:"
 config.fetch(:patterns_to_check).each do |pattern|
   puts "#  * #{pattern}"
 end
-puts ""
+puts "#"
 
-puts "################################################################"
-puts "# Files in \"left\" that are exact duplicates of \"right\" files"
-puts "# They are prefixed with a `='"
-puts "################################################################"
-duplicates.each do |path|
-  puts "= #{path}"
-  if ENV['RM_DUPS']
-    File.unlink(path)
+puts "# = Duplicates: #{duplicates.size}"
+puts "# < In left but not right: #{in_left_but_not_in_right.size}"
+puts "# > In right but not left: #{in_right_but_not_in_left.size}"
+puts "# Δ Different between left and right: #{different.size}"
+puts ""
+unless summary
+  puts "################################################################"
+  puts "# Files in \"left\" that are exact duplicates of \"right\" files"
+  puts "# They are prefixed with a `='"
+  puts "################################################################"
+  duplicates.each do |path|
+    puts "= #{path}"
+    if ENV['RM_DUPS']
+      File.unlink(path)
+    end
   end
-end
 
-puts ""
+  puts ""
 
-puts "#################################################"
-puts "# Files that are in \"left\" but not in \"right\""
-puts "# They are prefixed with a `<'"
-puts "#################################################"
-in_left_but_not_in_right.each do |path|
-  puts "< #{path}"
-end
+  puts "#################################################"
+  puts "# Files that are in \"left\" but not in \"right\""
+  puts "# They are prefixed with a `<'"
+  puts "#################################################"
+  in_left_but_not_in_right.each do |path|
+    puts "< #{path}"
+  end
 
-puts ""
+  puts ""
 
-puts "#################################################"
-puts "# Files that are in \"right\" but not in \"left\""
-puts "# They are prefixed with a `>'"
-puts "#################################################"
-in_right_but_not_in_left.each do |path|
-  puts "> #{path}"
-end
+  puts "#################################################"
+  puts "# Files that are in \"right\" but not in \"left\""
+  puts "# They are prefixed with a `>'"
+  puts "#################################################"
+  in_right_but_not_in_left.each do |path|
+    puts "> #{path}"
+  end
 
-puts ""
-puts "####################################################"
-puts "# Files that are different in \"left\" and \"right\""
-puts "# They are prefixed with a `Δ'"
-puts "####################################################"
-different.each do |path|
-  puts "Δ #{path}"
+  puts ""
+  puts "####################################################"
+  puts "# Files that are different in \"left\" and \"right\""
+  puts "# They are prefixed with a `Δ'"
+  puts "####################################################"
+  different.each do |path|
+    puts "Δ #{path}"
+  end
 end
