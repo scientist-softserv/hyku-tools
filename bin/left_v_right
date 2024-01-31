@@ -70,7 +70,7 @@ dir_glob_patterns_to_check.each do |pattern|
     end
   end
   Dir.glob(File.join(right, pattern)).each do |right_path|
-    path = right_path.sub(File.join(left, '/'), '')
+    path = right_path.sub(File.join(right, '/'), '')
     left_path = File.join(left, path)
     next if File.exist?(left_path)
 
@@ -80,7 +80,7 @@ end
 
 
 puts "#"*72
-puts "# {command_name} run context:"
+puts "# #{command_name} run context:"
 puts "#"*72
 puts "# Working Directory: #{FileUtils.pwd}"
 puts "# Left: #{left}"
@@ -118,7 +118,7 @@ puts "#################################################"
 puts "# Files that are in \"right\" but not in \"left\""
 puts "# They are prefixed with a `>'"
 puts "#################################################"
-in_left_but_not_in_right.each do |path|
+in_right_but_not_in_left.each do |path|
   puts "> #{path}"
 end
 
