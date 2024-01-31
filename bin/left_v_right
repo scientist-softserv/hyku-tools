@@ -7,11 +7,12 @@
 # - in left and same as in right
 # - in left but different from right
 require 'optparse'
-config = { left: './', dir: false, right: './hyrax-webapp', summary: false, patterns_to_check: ["spec/**/*.*", "app/**/*.*", "lib/**/*.*"] }
+DEFAULT_PATTERN = ["spec/**/*.*", "app/**/*.*", "lib/**/*.*"]
+config = { left: './', dir: false, right: './hyrax-webapp', summary: false, patterns_to_check: DEFAULT_PATTERN }
 
 command_name = File.basename(__FILE__)
 
-
+consider_replacing_pattern = true
 nlp = new_line_padding = " " * 37
 optparse = OptionParser.new do |options|
   # This banner is the first line of left help documentation.
@@ -26,12 +27,21 @@ optparse = OptionParser.new do |options|
     config[:left] = left
   end
 
-  options.on('-s', '--summary', "Only render a summary.") do |summary|
+  options.on('-s', '--summary', "Only render a summary.\n#{nlp}Default: #{config[:summary].inspect}") do |summary|
     config[:summary] = summary
   end
 
-  options.on('-d', '--dir-summaries', "Render the directory summaries.") do |dir|
+  options.on('-d', '--dir-summaries', "Render the directory summaries.\n#{nlp}Default: #{config[:dir].inspect}") do |dir|
     config[:dir] =dir
+  end
+
+  options.on('-p STRING', '--pattern', String, %(The pattern(s) to check for variance\n#{nlp}Default:\n#{nlp}  #{config[:patterns_to_check].join("\n#{nlp}  ")})) do |pattern|
+    if consider_replacing_pattern
+      config[:patterns_to_check] = []
+      consider_replacing_pattern = false
+    end
+
+    config[:patterns_to_check] << pattern
   end
 
   options.on_tail('-h', '--help', "You're looking at it!") do
@@ -50,6 +60,8 @@ rescue OptionParser::InvalidOption, OptionParser::MissingArgument
   warn optparse
   exit
 end
+
+require 'debug'; binding.break
 
 require 'fileutils'
 
